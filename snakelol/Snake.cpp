@@ -6,7 +6,7 @@ using namespace std;
 
 #define width 50
 #define height 25
-#define ESC 27
+#define esc 27
 
 // Initialize Variables
 bool gameRunning;
@@ -23,11 +23,19 @@ int score;
 enum directions { STOP = 0, UP, DOWN, LEFT, RIGHT };
 directions dir;
 
-void SetupCoords() {
+void SetupUser() {
 	x = rand() % width;
 	y = rand() % height;
+}
+
+void SetupTarget() {
 	targetX = rand() % width;
 	targetY = rand() % height;
+}
+
+void SetupCoords() {
+	SetupUser();
+	SetupTarget();
 }
 
 void GameSetup() {
@@ -64,6 +72,7 @@ void GameWindow() {
 	TopBottom();
 	Body();
 	TopBottom();
+	cout << "Score: " << score;
 }
 
 void GameInput() {
@@ -81,7 +90,7 @@ void GameInput() {
 			case 'd':
 				if (dir != LEFT) dir = RIGHT;
 				break;
-			case ESC:
+			case esc:
 				gameRunning = false;
 				break;
 		}
@@ -104,7 +113,15 @@ void Game() {
 		break;
 	}
 
+	// Snake hits the border
 	if(( x <= 0 || x >= width - 1) || (y < 0 || y >= height)) gameRunning = false;
+
+	// Snake hits the target
+	if (x == targetX && y == targetY) {
+		score++;
+		speed / 0.05;
+		SetupTarget();
+	}
 }
 
 int main() {
