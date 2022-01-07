@@ -1,5 +1,7 @@
 #include <iostream>
 #include <conio.h>
+#include <windows.h>
+
 using namespace std;
 
 #define width 50
@@ -111,5 +113,6 @@ int main() {
 		GameWindow();
 		GameInput();
 		Game();
+		Sleep(30);
 	}
 }
