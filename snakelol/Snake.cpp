@@ -4,6 +4,7 @@ using namespace std;
 
 #define width 50
 #define height 25
+#define ESC 27
 
 // Initialize Variables
 bool gameRunning;
@@ -48,7 +49,8 @@ void Body() {
 	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++) {
 			if (j == 0 || j == width - 1) cout << '#';
-			else if (i == y && j == x) cout << "*";
+			else if (i == y && j == x) cout << "@";
+			else if (i == targetY && j == targetX) cout << "O";
 			else cout << ' ';
 		}
 		cout << endl;
@@ -77,7 +79,7 @@ void GameInput() {
 			case 'd':
 				if (dir != LEFT) dir = RIGHT;
 				break;
-			case '0':
+			case ESC:
 				gameRunning = false;
 				break;
 		}
