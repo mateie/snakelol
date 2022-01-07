@@ -13,7 +13,7 @@ bool gameRunning;
 
 // User Variables
 int x, y, speed = 1;
-
+int tailX[100], tailY[100], tailLength;
 // Target Variables
 int targetX, targetY;
 
@@ -61,7 +61,18 @@ void Body() {
 			if (j == 0 || j == width - 1) cout << '#';
 			else if (i == y && j == x) cout << "@";
 			else if (i == targetY && j == targetX) cout << "O";
-			else cout << ' ';
+			else {
+				bool tail = false;
+				for (int k = 0; k < tailLength; k++) {
+					if (j == tailX[k] && i == tailY[k]) {
+						cout << "@";
+						tail = true;
+					}
+				}
+				if (!tail) {
+					cout << " ";
+				}
+			}
 		}
 		cout << endl;
 	}
@@ -118,9 +129,10 @@ void Game() {
 
 	// Snake hits the target
 	if (x == targetX && y == targetY) {
+		SetupTarget();
 		score++;
 		speed / 0.05;
-		SetupTarget();
+		tailLength++;
 	}
 }
 
