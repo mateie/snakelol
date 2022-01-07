@@ -100,7 +100,7 @@ void Game() {
 		break;
 	}
 
-	if(( x <= 0 || x >= width - 1) || (y <= 0 || y >= height)) gameRunning = false;
+	if(( x <= 0 || x >= width - 1) || (y < 0 || y >= height)) gameRunning = false;
 }
 
 int main() {
