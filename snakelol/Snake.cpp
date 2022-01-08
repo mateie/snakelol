@@ -148,6 +148,13 @@ void Game() {
 	// Snake hits the border
 	if(( x <= 0 || x >= width - 1) || (y < 0 || y >= height)) gameRunning = false;
 
+	// Snake hits the tail
+	for (int i = 0; i < tailLength; i++) {
+		if (x == tailX[i] && y == tailY[i]) {
+			gameRunning = false;
+		}
+	}
+
 	// Snake hits the target
 	if (x == targetX && y == targetY) {
 		SetupTarget();
