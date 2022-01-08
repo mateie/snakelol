@@ -14,6 +14,10 @@ bool gameRunning;
 // User Variables
 int x, y, speed = 1;
 int tailX[100], tailY[100], tailLength;
+
+// Tail Coordinates
+int fposX, fposY, sposX, sposY;
+
 // Target Variables
 int targetX, targetY;
 
@@ -109,6 +113,23 @@ void GameInput() {
 }
 
 void Game() {
+
+	//Tail 
+	fposX = tailX[0];
+	fposY = tailY[0];
+	tailX[0] = x;
+	tailY[0] = y;
+
+	for (int i = 1; i < tailLength; i++) {
+		sposX = tailX[i];
+		sposY = tailY[i];
+		tailX[i] = fposX;
+		tailY[i] = fposY;
+		fposX = sposX;
+		fposY = sposY;
+	}
+
+	// Directions
 	switch (dir) {
 	case LEFT:
 		x -= speed;
@@ -131,7 +152,6 @@ void Game() {
 	if (x == targetX && y == targetY) {
 		SetupTarget();
 		score++;
-		speed / 0.05;
 		tailLength++;
 	}
 }
